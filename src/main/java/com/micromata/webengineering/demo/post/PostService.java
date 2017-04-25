@@ -1,4 +1,4 @@
-package com.micromata.webengineering.demo.post;
+package main.java.com.micromata.webengineering.demo.post;
 
 import org.springframework.stereotype.Service;
 
@@ -10,14 +10,14 @@ import java.util.List;
  */
 @Service
 public class PostService {
-    private List<String> posts = new LinkedList<>();
+    private List<Post> posts = new LinkedList<>();
 
     /**
      * Retrieve the list of all posts.
      *
      * @return post list
      */
-    public List<String> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
@@ -28,6 +28,6 @@ public class PostService {
      * @param title the post title.
      */
     public void addPost(String title) {
-        posts.add(title);
+        posts.add(new Post(title));
     }
 }
