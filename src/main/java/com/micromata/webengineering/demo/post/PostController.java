@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+//import main.java.com.micromata.webengeneering.demo.util.Util;
+
 /**
  * HTTP endpoint for a post-related HTTP requests.
  */
@@ -14,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
     @Autowired
     private PostService postService;
+    @Autowired
+    private Util util;
+    
+    private class PostAddRetrun {
+    	public String url;
+    }
 
     @RequestMapping("/post")
     public Iterable<Post> getPostList() {
@@ -28,8 +36,12 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/add", method = RequestMethod.POST)
-    public void addPost(@RequestBody Post post) {
+    public PostAddRetrun addPost(@RequestBody Post post) {
         postService.addPost(post);
+        PostAddRetrun rPost = new PostAddRetrun();
+        rPost.url = util.getCurrentHostAndPort(); 
+        rPost.url += "/post/" + post.getGuid();
+        return rPost;
     }
     
     @RequestMapping(value = "/post/delete/{guid}", method = RequestMethod.DELETE)
