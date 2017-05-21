@@ -3,6 +3,7 @@ package main.java.com.micromata.webengineering.demo.post;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,8 +12,13 @@ import javax.persistence.PrePersist;
 @Entity
 public class Post {
 
+	private static final int titleLength = 1024;
+	
 	private Date createdAt; //Exercise: time of creation
+	
+	@Column(length = titleLength)
 	private String title;
+	
 	@Id
 	@GeneratedValue
 	private UUID guid;
