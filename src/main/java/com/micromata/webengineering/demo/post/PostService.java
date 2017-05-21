@@ -1,9 +1,7 @@
 package main.java.com.micromata.webengineering.demo.post;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,55 +9,26 @@ import java.util.UUID;
  */
 @Service
 public class PostService {
-    private List<Post> posts = new LinkedList<>();
-
-    /**
-     * Retrieve the list of all posts.
-     *
-     * @return post list
-     */
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-
-    /**
-     * Add a new post.
-     *
-     * @param title the post title.
-     */
-    public void addPost(String title) {
-        posts.add(new Post(title));
+	@Autowired
+	private PostRepository repository;
+	
+	public Iterable<Post> getPosts() 
+	{
+		return repository.findAll();
+	}
+	
+    public void addPost(Post p)
+    {
+    	repository.save(p);
     }
     
-    public Post getPostByGuid(UUID guid)
+    public Post getPost(UUID id)
     {
-    	//since there will be a database this should be good enough
-    	Post rValue = null;
-    	for (Post p : posts)
-    	{
-    		if (p.getGuid().equals(guid))
-    		{
-    			rValue = p;
-    			break;
-    		}
-    	}
-    	return rValue;
+    	return repository.findOne(id);
     }
-
-    /**
-     * deletes a single post
-     * @param guid guid of the post
-     */
-	public void deletePost(UUID guid) {
-		// since there will be a database this should work good enough
-		for (Post p : posts)
-		{
-			if (p.getGuid().equals(guid))
-			{
-				posts.remove(p);
-				break;
-			}
-		}
-	}
+    
+    public void deletePost(UUID id)
+    {
+    	repository.delete(id);
+    }
 }

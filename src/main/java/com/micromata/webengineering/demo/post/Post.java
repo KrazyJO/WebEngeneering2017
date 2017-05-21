@@ -1,34 +1,36 @@
 package main.java.com.micromata.webengineering.demo.post;
 
+import java.util.Date;
 import java.util.UUID;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+
+@Entity
 public class Post {
 
-	private long timestamp; //Exercise: time of creation
-	private String message; //post content
+	private Date createdAt; //Exercise: time of creation
+	private String title;
+	@Id
+	@GeneratedValue
 	private UUID guid;
 	
-	Post(String message) 
-	{
-		this.timestamp = System.currentTimeMillis();
-		this.guid = java.util.UUID.randomUUID();
-		this.message = message;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
-	public String getMessage() {
-		return message;
+	public String getTitle() {
+		return title;
 	}
 	
-	public void setMessage(String message) {
-		this.message = message;
+	public Date getCreatedAt() {
+		return this.createdAt;
 	}
 	
-	public long getTimestamp() {
-		return timestamp;
-	}
-	
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
+	public void setCreatedAt(Date d) {
+		this.createdAt = d;
 	}
 
 	public UUID getGuid() {
@@ -39,10 +41,8 @@ public class Post {
 		this.guid = guid;
 	}
 	
-	@Override
-	public String toString()
-	{
-		return this.timestamp + ": " + this.message; 
-	}
-	
+	@PrePersist
+    public void prePersist() {
+        createdAt = new Date();
+    }
 }
