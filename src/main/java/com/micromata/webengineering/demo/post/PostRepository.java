@@ -1,4 +1,4 @@
-package main.java.com.micromata.webengineering.demo.post;
+package com.micromata.webengineering.demo.post;
 
 import java.util.List;
 import java.util.UUID;

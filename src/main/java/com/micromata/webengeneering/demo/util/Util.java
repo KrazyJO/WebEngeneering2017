@@ -1,4 +1,4 @@
-package main.java.com.micromata.webengeneering.demo.util;
+package com.micromata.webengeneering.demo.util;
 
 import java.net.InetAddress;
 

@@ -1,4 +1,4 @@
-package main.java.com.micromata.webengineering.demo.post;
+package com.micromata.webengineering.demo.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
