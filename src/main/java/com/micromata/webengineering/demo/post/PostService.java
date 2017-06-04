@@ -17,6 +17,7 @@ public class PostService {
 		return repository.findAll();
 	}
 	
+    
     public void addPost(Post p)
     {
     	repository.save(p);
