@@ -10,6 +10,8 @@ import com.micromata.webengineering.demo.user.UserService;
 
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 /**
  * Handle all CRUD operations for posts.
  */
@@ -52,6 +54,15 @@ public class PostService {
     	repository.delete(id);
     }
 
+    public void deleteComment(Comment c)
+    {
+    	Post p = repository.findPostForComment(c);
+    	p.getComments().remove(c);
+    	
+    	repository.save(p);
+    }
+    
+    @Transactional
 	public void addComment(Long postId, Comment c) {
 		Post p = repository.findOne(postId);
 		
