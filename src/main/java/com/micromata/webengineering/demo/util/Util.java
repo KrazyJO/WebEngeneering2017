@@ -1,12 +1,13 @@
-package com.micromata.webengineering.demo.post;
+package com.micromata.webengineering.demo.util;
 
 import java.net.InetAddress;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerInitializedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerInitializedEvent;
 
 @Service
 @Configuration
