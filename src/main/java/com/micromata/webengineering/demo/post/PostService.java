@@ -2,6 +2,11 @@ package com.micromata.webengineering.demo.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.micromata.webengineering.demo.user.User;
+import com.micromata.webengineering.demo.user.UserRepository;
+import com.micromata.webengineering.demo.user.UserService;
+
 import java.util.UUID;
 
 /**
@@ -12,6 +17,12 @@ public class PostService {
 	@Autowired
 	private PostRepository repository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private UserService userService;
+	
 	public Iterable<Post> getPosts() 
 	{
 		return repository.findAll();
@@ -19,16 +30,24 @@ public class PostService {
 	
     public void addPost(Post p)
     {
+    	User author = userService.getCurrentUser();
+    	p.setAuthor(author);
+    	
     	repository.save(p);
     }
     
-    public Post getPost(UUID id)
+    public Post getPost(Long id)
     {
     	return repository.findOne(id);
     }
     
-    public void deletePost(UUID id)
+    public void deletePost(Long id)
     {
+    	Post post = repository.findOne(id);
+    	if (!post.getAuthor().equals(userService.getCurrentUser()))
+    	{
+    		throw new IllegalStateException("User not allowed to delete post");
+    	}
     	repository.delete(id);
     }
 }

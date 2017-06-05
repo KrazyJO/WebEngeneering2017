@@ -1,7 +1,10 @@
 package com.micromata.webengineering.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.micromata.webengineering.demo.user.User;
+import com.micromata.webengineering.demo.user.UserRepository;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,7 +22,7 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-
+  
     /**
      * Configuration for Swagger.
      *

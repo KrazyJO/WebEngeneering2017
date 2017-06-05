@@ -5,3 +5,5 @@ target
 /bin/
 /.project
 /.classpath
+/test.mv.db
+/test.trace.db

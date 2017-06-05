@@ -12,3 +12,7 @@ This is the repository for the lecture Webengineering in the summer semester 201
 
 * [2017-04-24](https://github.com/micromata/webengineering-2017/blob/master/slides/2017-04-24-webengineering.pdf)
 
+## Heroku auth issue
+1. heroku auto:token
+2. git push heroku master
+3. use: username: blank, password: auth token.
